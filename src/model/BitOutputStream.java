@@ -1,7 +1,8 @@
-package utils;
+package model;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.List;
 
 public class BitOutputStream {
 
@@ -13,6 +14,12 @@ public class BitOutputStream {
 		this.os=os;
 		byteToWrite=0;
 		size=0;
+	}
+	
+	public void writeBit(List<Integer> bits) throws IOException{
+		for(Integer b : bits){
+			writeBit(b);
+		}
 	}
 	
 	/**
@@ -63,16 +70,14 @@ public class BitOutputStream {
 		if((b|1)!=1){
 			throw new IllegalArgumentException();
 		}
-		//auxiliarLiteralBitWriting(b);
+	//	auxiliarLiteralBitWriting(b);
 		byteToWrite=(byteToWrite<<1)|b;
 		size++;
 		tryToWriteOutputStream();
 		return;
 	}
 	
-	private void auxiliarLiteralBitWriting(int b) throws IOException{
-		os.write(b>0?'1':'0');
-	}
+	private void auxiliarLiteralBitWriting(int b) throws IOException{os.write(b>0?'1':'0');}
 	
 	private void tryToWriteOutputStream() throws IOException{
 		if(size>8){

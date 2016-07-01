@@ -2,10 +2,10 @@ package model;
 
 import java.io.IOException;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 import java.util.Queue;
 import java.util.function.Function;
-
-import utils.BitOutputStream;
 
 public class Tree<T> implements Comparable<Tree<T>>{
 
@@ -85,4 +85,26 @@ public class Tree<T> implements Comparable<Tree<T>>{
 		}
 		return str.toString();
 	}
+	
+	public void fillingMap(Map<T, List<Integer>> map){
+		LinkedList<Integer> curr = new LinkedList<Integer>();
+		fillingMap(root, map, curr);
+		return;
+	}
+
+	private void fillingMap(Node<T> node, Map<T, List<Integer>> map,
+			LinkedList<Integer> curr) {
+		if(node.data==null){
+			curr.addLast(0);
+			fillingMap(node.left, map, curr);
+			curr.removeLast();
+			curr.addLast(1);
+			fillingMap(node.right, map, curr);
+			curr.removeLast();
+		}else{
+			map.put(node.data, new LinkedList<Integer>(curr));
+		}
+	}
+	
+	
 }
