@@ -50,7 +50,7 @@ public class BitOutputStream {
 	 */
 	public void writeByte(int b) throws IOException{
 		for(int i=0; i<8; i++){
-			writeBit((b&0x80)>>7);
+			writeBit((b&0x80)>0);
 			b<<=1;
 		}
 	}
@@ -77,7 +77,7 @@ public class BitOutputStream {
 		return;
 	}
 	
-	private void auxiliarLiteralBitWriting(int b) throws IOException{os.write(b>0?'1':'0');}
+	//private void auxiliarLiteralBitWriting(int b) throws IOException{os.write(b>0?'1':'0');}
 	
 	private void tryToWriteOutputStream() throws IOException{
 		if(size>8){
