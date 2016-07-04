@@ -134,9 +134,9 @@ public class Tree<T> implements Comparable<Tree<T>> {
 			throws IOException {
 		int bit = bis.readBit();
 		if (bit == 0) {
-			return new Node(buildFromFile(bis), buildFromFile(bis));
+			return new Node<Integer>(buildFromFile(bis), buildFromFile(bis));
 		} else {
-			return new Node(bis.readByte());
+			return new Node<Integer>(bis.readByte());
 		}
 	}
 
